@@ -1,4 +1,4 @@
-CLIENT INSTALL GUIDE - derechosTransmision
+CLIENT INSTALL GUIDE - notificacionesCese
 
 Recommended approach
 
@@ -42,7 +42,7 @@ The script generates DOCX files and converts them to PDF. The project expects on
 
 Files the client will receive
 
-- Project folder: derechosTransmision
+- Project folder: notificacionesCese
 - Google OAuth file renamed to: src\credentials.json
 
 The client should NOT create credentials.json themselves if you are managing the Google Cloud app.
@@ -81,34 +81,22 @@ Installation steps for the client
 
 That token is machine-specific and user-specific. Do not share it between users.
 
-Optional final setup step: create a client shortcut
+Optional final setup step: create a one-line launcher command
 
-If you also deliver the separate setup utility, the client can generate a Windows shortcut and ready-to-paste commands without relying on a .cmd shortcut.
+If you also deliver the separate setup utility, the client can generate a ready-to-paste command and avoid typing project paths manually every time.
 
 1. Run this helper:
    py C:\path\to\launcher_setup\generate_launcher.py
 
-2. When asked for the project path, paste the full path to the derechosTransmision folder.
+2. When asked for the project path, paste the full path to the notificacionesCese folder.
 
 3. The helper creates these files:
-   - DerechosTransmision.lnk
-   - run_derechos_transmision.ps1
-   - run_derechos_transmision.cmd
-   - RUN_DERECHOS_TRANSMISION_COMMAND.txt
+   - run_notificaciones_cese.cmd
+   - RUN_NOTIFICACIONES_CESE_COMMAND.txt
 
-4. Preferred client launch method:
-   - double-click DerechosTransmision.lnk
-   - or pin that shortcut to the Desktop / Start menu
+4. Open RUN_NOTIFICACIONES_CESE_COMMAND.txt and copy the PowerShell command.
 
-5. If the client prefers a command, open RUN_DERECHOS_TRANSMISION_COMMAND.txt and use:
-   - the direct python.exe PowerShell command first
-   - or the PowerShell .ps1 launcher
-
-6. Avoid creating a shortcut to the .cmd file if Norton or another antivirus flags it as a generic threat such as IDP.Generic.
-
-Why this matters
-
-Some antivirus products treat .cmd shortcuts that launch interpreters from user folders as suspicious behavior. A .lnk shortcut that points directly to python.exe with the project folder as the working directory is usually less likely to be flagged than a shortcut to a batch file.
+5. In the future, the client can launch the app by pasting that one line into PowerShell.
 
 How to use the app
 

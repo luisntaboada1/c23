@@ -12,6 +12,7 @@ from pypdf import PdfReader, PdfWriter
 from reportlab.pdfgen import canvas
 
 from config import (
+    ACTA_OPTIONAL_FIELDS,
     ACTA_PLACEHOLDER_MAP,
     ACTA_QR_IMAGE_WIDTH_INCHES,
     ACTA_QR_MARKER_TEXT,
@@ -170,7 +171,19 @@ def read_acta_data_xlsx(local_xlsx_path: str | Path) -> dict:
             "The following acta fields are empty in acta_data.xlsx: " + ", ".join(empty_fields)
         )
 
-    return {field: result[field] for field in ACTA_REQUIRED_FIELDS}
+    normalized_result = {field: result[field] for field in ACTA_REQUIRED_FIELDS}
+    for field in ACTA_OPTIONAL_FIELDS:
+        normalized_result[field] = result.get(field, "").strip()
+
+    return normalized_result
+
+
+def build_canal_tv_fragment(acta_data: dict) -> str:
+    canal_tv = acta_data.get("canal tv", "").strip()
+    if not canal_tv:
+        return ""
+
+    return f', del canal "{canal_tv}"'
 
 
 def _iter_all_paragraphs(document):
@@ -290,10 +303,13 @@ def generate_acta_docx(
 
     document = Document(str(template_docx_path))
 
-    replacements = {
-        placeholder: acta_data[field_name]
-        for placeholder, field_name in ACTA_PLACEHOLDER_MAP.items()
-    }
+    replacements = {}
+    for placeholder, field_name in ACTA_PLACEHOLDER_MAP.items():
+        if field_name == "canal tv fragmento":
+            replacements[placeholder] = build_canal_tv_fragment(acta_data)
+            continue
+
+        replacements[placeholder] = acta_data[field_name]
 
     replace_placeholders_in_docx(document, replacements)
     insert_qr_into_acta_docx(document, relacion_anexos_qr_path)

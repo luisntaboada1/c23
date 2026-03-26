@@ -19,7 +19,6 @@ RUNS_PATH = BASE_DIR.parent / "runs"
 
 TEMPLATES_PATH = BASE_DIR.parent / "templates"
 RELACION_ANEXOS_TEMPLATE_PATH = TEMPLATES_PATH / "relacion_anexos_qr_template.docx"
-ACTA_TEMPLATE_PATH = TEMPLATES_PATH / "plantilla_acta_1t.docx"
 
 ANEXO_QR_FILENAMES = {
     "anexoA": "ANEXOA_QR.png",
@@ -43,33 +42,56 @@ ACTA_1T_OUTPUT_PDF_FILENAME = "ACTA_1T.pdf"
 ACTA_A_OUTPUT_DOCX_FILENAME = "ACTA_A.docx"
 ACTA_A_OUTPUT_PDF_FILENAME = "ACTA_A.pdf"
 
-ACTA_REQUIRED_FIELDS = [
+ACTA_INPUT_FIELDS = [
     "numero de acta",
-    "fecha escrita",
+    "fecha de acta",
+    "fecha de diligencia",
     "hora inicio diligencia",
-    "dirección y referencias",
-    "nombre del restaurante",
-    "numero de mesas",
-    "numero de pantallas",
-    "partido",
+    "dirección del restaurante",
+    "nombre / denominación del restaurante",
+    "fecha de entrega",
+    "sexo de quien recibió la carta",
+    "nombre de quien recibió la carta",
+    "clausula_firma",
     "hora fin diligencia",
+    "numero de instrumento",
+    "fecha del instrumento",
 ]
 
-ACTA_OPTIONAL_FIELDS = [
-    "canal tv",
+ACTA_TEMPLATE_FIELDS = [
+    "acta_numero",
+    "acta_numero_letra",
+    "fecha_acta_num",
+    "fecha_acta_letra",
+    "fecha_diligencia_letra",
+    "hora_inicio_letra",
+    "direccion_restaurante",
+    "nombre_restaurante",
+    "fecha_entrega_letra",
+    "sexo_recibe",
+    "nombre_recibe",
+    "clausula_firma",
+    "hora_fin_letra",
+    "instrumento_numero_letra",
+    "instrumento_fecha_letra",
 ]
 
 ACTA_PLACEHOLDER_MAP = {
-    "{{ numero de acta }}": "numero de acta",
-    "{{ fecha escrita }}": "fecha escrita",
-    "{{ hora inicio diligencia }}": "hora inicio diligencia",
-    "{{ dirección y referencias }}": "dirección y referencias",
-    "{{ nombre del restaurante }}": "nombre del restaurante",
-    "{{ numero de mesas }}": "numero de mesas",
-    "{{ numero de pantallas }}": "numero de pantallas",
-    "{{ partido }}": "partido",
-    "{{ canal tv fragmento }}": "canal tv fragmento",
-    "{{ hora fin diligencia }}": "hora fin diligencia",
+    "{{ acta_numero }}": "acta_numero",
+    "{{ acta_numero_letra }}": "acta_numero_letra",
+    "{{ fecha_acta_num }}": "fecha_acta_num",
+    "{{ fecha_acta_letra }}": "fecha_acta_letra",
+    "{{ fecha_diligencia_letra }}": "fecha_diligencia_letra",
+    "{{ hora_inicio_letra }}": "hora_inicio_letra",
+    "{{ direccion_restaurante }}": "direccion_restaurante",
+    "{{ nombre_restaurante }}": "nombre_restaurante",
+    "{{ fecha_entrega_letra }}": "fecha_entrega_letra",
+    "{{ sexo_recibe }}": "sexo_recibe",
+    "{{ nombre_recibe }}": "nombre_recibe",
+    "{{ clausula_firma }}": "clausula_firma",
+    "{{ hora_fin_letra }}": "hora_fin_letra",
+    "{{ instrumento_numero_letra }}": "instrumento_numero_letra",
+    "{{ instrumento_fecha_letra }}": "instrumento_fecha_letra",
 }
 
 ACTA_QR_MARKER_TEXT = "Aquí se insertará automáticamente el QR de RelacionAnexosQR_QR.png"

@@ -1,0 +1,16 @@
+requerimientos:
+1. Carpeta de restaurante en drive con Anexos públicos y datosFormato
+2. Vaciar la carpeta de cache
+
+
+por funciones:
+
+1. Checar si los Anexos y datosFormato existe.
+	- Si existen, checar que sean públicos
+	.- Si se cumple todo, regresa {'links' : …}
+
+2. Generar los qr
+
+3. Armar los pdf de los qr (Anexos y RelaciónAnexos)
+
+4. 

@@ -1,6 +1,8 @@
-# derechosTransmision
+# notificacionesCese
 
 Python script that validates a Google Drive restaurant folder, generates QR assets and DOCX/PDF outputs, and uploads the generated files back to the same Drive folder.
+
+This folder was prepared as a separate project based on the proven `derechosTransmision` workflow. For now, the code path is intentionally kept equivalent while the new Excel form and templates for `notificacionesCese` are developed.
 
 ## What the project expects
 
@@ -50,10 +52,6 @@ python src/main.py
 ```
 
 Then paste the Google Drive folder link when prompted.
-
-## Windows launcher note
-
-If you want a client-friendly Windows shortcut, use `launcher_setup/generate_launcher.py` and prefer the generated `.lnk` shortcut or direct `python.exe` command. Avoid distributing a shortcut to a `.cmd` file because some antivirus tools may flag that pattern as suspicious.
 
 ## Git notes
 
