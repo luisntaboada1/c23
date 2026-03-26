@@ -1,0 +1,14 @@
+derechosTransmision launcher command
+
+Project folder: C:\Users\lunta\OneDrive\Desktop\C23\derechosTransmision
+Launcher file: C:\Users\lunta\OneDrive\Desktop\C23\launcher_setup\output2\run_derechos_transmision.cmd
+No local virtual environment was detected; using the system python command
+
+Paste this into PowerShell:
+& "C:\Users\lunta\OneDrive\Desktop\C23\launcher_setup\output2\run_derechos_transmision.cmd"
+
+Paste this into Command Prompt:
+"C:\Users\lunta\OneDrive\Desktop\C23\launcher_setup\output2\run_derechos_transmision.cmd"
+
+Tip:
+You can also double-click the .cmd file to launch the process.

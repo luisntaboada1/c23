@@ -1,0 +1,31 @@
+# Secrets
+token.json
+credentials.json
+
+# Python cache/build artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Generated run artifacts
+.test_tmp/
+runs/*
+!runs/.gitkeep
+
+# Editor/temp files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+tempCodeRunnerFile.py
+
+# OS files
+.DS_Store
+Thumbs.db

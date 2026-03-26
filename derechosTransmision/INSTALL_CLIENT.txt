@@ -1,0 +1,174 @@
+CLIENT INSTALL GUIDE - derechosTransmision
+
+Recommended approach
+
+Do not ask each client to create their own Google Cloud project unless you really want to support multiple separate setups.
+
+The simplest setup is:
+1. You create and maintain the Google Cloud OAuth app.
+2. You add the client's Google account as an allowed user if your OAuth app is still in testing.
+3. You send the client:
+   - the project code
+   - the Google OAuth credentials file named credentials.json
+4. The client installs the project locally.
+5. On first run, the client signs in to Google in the browser.
+6. The app creates token.json on that machine and can run again without repeating the full setup.
+
+Important Google note
+
+This app uses the Google Drive scope:
+https://www.googleapis.com/auth/drive
+
+That is a broad Drive scope. Based on current Google documentation, if the app is not fully published and verified, an External app in testing mode only works for users you add as test users.
+
+So for now, the practical path is:
+- keep one Google Cloud project under your control
+- use one Desktop OAuth client
+- add each client email as a test user if needed
+
+What the client needs
+
+- Windows computer
+- Python installed
+- Internet connection
+- Google account with access to the Drive folders that will be processed
+- Microsoft Word installed OR LibreOffice installed
+
+Why Word or LibreOffice is needed
+
+The script generates DOCX files and converts them to PDF. The project expects one of these local tools:
+- Microsoft Word on Windows
+- LibreOffice with soffice available in PATH
+
+Files the client will receive
+
+- Project folder: derechosTransmision
+- Google OAuth file renamed to: src\credentials.json
+
+The client should NOT create credentials.json themselves if you are managing the Google Cloud app.
+
+Installation steps for the client
+
+1. Download or copy the project folder to the computer.
+
+2. Open Terminal or PowerShell inside the project folder.
+
+3. Create a virtual environment:
+   py -m venv .venv
+
+4. Activate the virtual environment:
+   .\.venv\Scripts\Activate.ps1
+
+5. Install Python dependencies:
+   pip install -r requirements.txt
+
+6. If Microsoft Word will be used for PDF conversion, also install:
+   pip install docx2pdf
+
+7. Place the OAuth credentials file here:
+   src\credentials.json
+
+8. Run the app:
+   python src\main.py
+
+9. On the first run:
+   - a browser window should open
+   - sign in with the Google account that has access to the Drive folders
+   - accept the requested permissions
+
+10. After successful login, the app creates:
+   src\token.json
+
+That token is machine-specific and user-specific. Do not share it between users.
+
+Optional final setup step: create a one-line launcher command
+
+If you also deliver the separate setup utility, the client can generate a ready-to-paste command and avoid typing project paths manually every time.
+
+1. Run this helper:
+   py C:\path\to\launcher_setup\generate_launcher.py
+
+2. When asked for the project path, paste the full path to the derechosTransmision folder.
+
+3. The helper creates these files:
+   - run_derechos_transmision.cmd
+   - RUN_DERECHOS_TRANSMISION_COMMAND.txt
+
+4. Open RUN_DERECHOS_TRANSMISION_COMMAND.txt and copy the PowerShell command.
+
+5. In the future, the client can launch the app by pasting that one line into PowerShell.
+
+How to use the app
+
+When the app starts, it asks for a mode:
+- 1 = single folder
+- 2 = parent folder with many child folders
+
+Then paste the Google Drive link requested by the program.
+
+Required contents in each restaurant folder
+
+The Drive folder must contain exactly these files:
+- ANEXOA.pdf
+- ANEXOB.pdf
+- ANEXOC.pdf
+- acta_data.xlsx
+
+Important:
+- The annex PDFs must already be public in Drive
+- The client must have permission to access the folder
+- Avoid duplicate files with the same names in the same folder
+
+Expected result
+
+The script validates the folder, generates QR images and documents, converts documents to PDF, and uploads the generated files back to the same Drive folder.
+
+Files created locally
+
+- src\token.json
+- temporary folders inside runs\
+
+The temporary folders should be deleted automatically after each run.
+
+Basic troubleshooting
+
+Problem: Browser login fails
+- Confirm src\credentials.json exists
+- Confirm the client Google account was added as a test user if the app is still in testing
+- Confirm the client is signing in with the correct Google account
+
+Problem: The app says required files are missing
+- Check that the Drive folder contains the exact required filenames
+
+Problem: The app says annex PDFs are not public
+- In Google Drive, change sharing so those annex PDFs are public for anyone with the link or anyone, depending on your current workflow
+
+Problem: PDF conversion fails
+- Install Microsoft Word and docx2pdf, or install LibreOffice and make sure soffice is available in PATH
+
+Problem: Permission or access error in Drive
+- Confirm the signed-in Google account can open the folder manually in Google Drive
+
+Suggested handoff checklist for you
+
+Before giving the app to a client, verify:
+- Google Drive API is enabled in your Google Cloud project
+- OAuth Desktop client exists
+- OAuth consent screen is configured
+- client email was added as a test user if required
+- credentials.json was downloaded from your project
+- client has access to the target Drive folders
+
+Official references
+
+Google Drive Python quickstart:
+https://developers.google.com/workspace/drive/api/quickstart/python
+
+OAuth consent screen / testing users:
+https://support.google.com/cloud/answer/13461325
+
+Unverified apps and user limits:
+https://support.google.com/cloud/answer/7454865
+
+Drive scopes and sensitivity:
+https://developers.google.com/workspace/drive/api/guides/api-specific-auth
